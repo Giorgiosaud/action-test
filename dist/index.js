@@ -5600,6 +5600,8 @@ try {
   const context = JSON.stringify(github.context, undefined, 2)
   console.log(`The event payload: ${payload}`);
   console.log(`The github context: ${context}`);
+  console.log(`The github environment: ${process.env}`);
+
 } catch (error) {
   core.setFailed(error.message);
 }
