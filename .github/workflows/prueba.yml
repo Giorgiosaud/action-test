@@ -1,5 +1,7 @@
 name: CI
-on: push
+on: 
+  push:
+  release:
 jobs:
   prod-check:
     runs-on: ubuntu-latest
