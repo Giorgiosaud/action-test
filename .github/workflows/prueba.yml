@@ -1,6 +1,5 @@
-name: prueba
-on:
-  push:
+name: CI
+on: push
 jobs:
   prod-check:
     if: ${{ github.ref == 'refs/heads/main' }}
