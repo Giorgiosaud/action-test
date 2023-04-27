@@ -6,7 +6,7 @@ jobs:
   define-environment:
     runs-on: ubuntu-latest
     outputs:
-      branch: ${{ steps.extract_branch.branch }}
+      branch: ${{ steps.extract_branch.outputs.branch }}
     steps:
       - name: Extract branch name
         shell: bash
