@@ -26,4 +26,8 @@ jobs:
         run: echo "Deploying to production server on branch $GITHUB_REF $BRANCH"
         env:
           BRANCH: ${{ needs.define-environment.outputs.branch }}
+      - name: run
+        run: echo "Deploying to production server on branch $GITHUB_REF $BRANCH"
+        env:
+          BRANCH: ${{ steps.extract_branch.outputs.branch }}
 
