@@ -3,11 +3,21 @@ on: push
 jobs:
   prod-check:
     runs-on: ubuntu-latest
-    - name: Extract branch name
-      shell: bash
-      run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >>$GITHUB_OUTPUT
-      id: extract_branch
-    - name: run
+    steps:
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >>$GITHUB_OUTPUT
+        id: extract_branch
+      - name: run
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: echo "Deploying to production server on branch $GITHUB_REF"
+
+
+name: CI
+on: push
+jobs:
+  prod-check:
     if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
     steps:
       - run: echo "Deploying to production server on branch $GITHUB_REF"
