@@ -9,5 +9,7 @@ jobs:
         run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >>$GITHUB_OUTPUT
         id: extract_branch
       - name: run
-        run: echo "Deploying to production server on branch $GITHUB_REF"
+        run: echo "Deploying to production server on branch $GITHUB_REF $BRANCH"
+        env:
+          BRANCH: ${{ steps.extract_branch.outputs.branch }}
 
