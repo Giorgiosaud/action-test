@@ -10,9 +10,13 @@ jobs:
     steps:
       - name: Extract branch name
         shell: bash
-        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >>$GITHUB_OUTPUT
         id: extract_branch
-      
+        run: |
+        if [[ $GITHUB_REF == *"refs/tags"* ]]; then
+          echo "branch=production" >>$GITHUB_OUTPUT
+        else
+          echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >>$GITHUB_OUTPUT
+        fi
   prod-check:
     runs-on: ubuntu-latest
     needs:
