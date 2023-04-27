@@ -5,11 +5,14 @@ on:
 jobs:
   define-environment:
     runs-on: ubuntu-latest
+    outputs:
+      branch: ${{ steps.extract_branch.branch }}
     steps:
       - name: Extract branch name
         shell: bash
         run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >>$GITHUB_OUTPUT
         id: extract_branch
+      
   prod-check:
     runs-on: ubuntu-latest
     needs:
@@ -22,5 +25,5 @@ jobs:
       - name: run
         run: echo "Deploying to production server on branch $GITHUB_REF $BRANCH"
         env:
-          BRANCH: ${{ jobs.define-environment.steps.extract_branch.outputs.branch }}
+          BRANCH: ${{ needs.define-environment.outputs.branch }}
 
